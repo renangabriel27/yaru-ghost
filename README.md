@@ -4,6 +4,31 @@ A clean, minimal dark theme inspired by Ubuntu 24.04 (Yaru dark).
 
 A theme for [Ghost](https://ghost.org) (≥ 5.0), based on the official [Source](https://github.com/TryGhost/Source) theme (MIT).
 
+![Yaru theme for Ghost on desktop and mobile](docs/screenshots/preview.png)
+
+## Features
+
+- **Terminal prompt search**: type after `guest@localhost:~$` to filter posts by title, with a blinking orange cursor (`/` to focus, `Enter` to open, `Esc` to clear).
+- **GTK-style navigation**: Yaru tabs with an orange accent on the current item and on hover.
+- **Code blocks as GNOME windows**, with Prism.js syntax highlighting in two palettes: Ubuntu terminal or ray.so.
+- **Blog with category pills**: a `/blog/` page and `#tag` pills to filter by category.
+- **Projects portfolio**: a tag that works as a portfolio, kept out of the blog list.
+- **Numbered post list** with a smooth slide on hover.
+- **Members and newsletter** ready, with Bluesky, LinkedIn and GitHub links in the footer.
+- **English and Brazilian Portuguese**, 19 options in Ghost Admin and no code changes needed.
+
+## Screenshots
+
+| Home | Blog with category pills |
+|---|---|
+| ![Home page with the numbered post list](docs/screenshots/home.png) | ![Blog page with category pills](docs/screenshots/blog.png) |
+| **Search in the prompt** | **Post** |
+| ![Searching posts by title in the terminal prompt](docs/screenshots/search.png) | ![Post header with the prompt breadcrumb](docs/screenshots/post.png) |
+| **Code: Yaru palette** | **Code: Ray.so palette** |
+| ![Code block as a GNOME window with the Ubuntu terminal palette](docs/screenshots/code-yaru.png) | ![Code block as a GNOME window with the ray.so palette](docs/screenshots/code-rayso.png) |
+| **Projects** | **Mobile** |
+| ![Projects portfolio tag page](docs/screenshots/projects.png) | <img src="docs/screenshots/mobile-tag.png" alt="Tag page on mobile with category pills" width="260"> <img src="docs/screenshots/mobile-home.png" alt="Home page on mobile" width="260"> |
+
 ## Installation
 
 1. Download `dist/yaru.zip` (or build it with `npm run zip`).
