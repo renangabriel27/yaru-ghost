@@ -38,6 +38,9 @@ A theme for [Ghost](https://ghost.org) (≥ 5.0), based on the official [Source]
 3. Activate the theme and adjust the options in **Design & branding → Customize**.
 4. Upload this repository's `routes.yaml` in **Settings → Labs → Routes → Upload routes file**. It creates the `/blog/` page (`blog.hbs` template): every post except the ones in the projects tag, with pagination and the category pills.
 5. Optional: create a page with the `blog` slug. Its title and excerpt become the title and description of `/blog/`.
+6. Optional: import demo content. Download `yaru-demo-content.json` from the [latest release](https://github.com/renangabriel27/yaru-ghost/releases/latest) and upload it in **Settings → Advanced → Import/Export → Import content**. It adds 7 example posts (AI, Rails 8, Hotwire and an open source project) plus the style guide, with their tags. Ghost tags them with an internal `#import-…` tag, so you can find and delete them all later.
+
+> Ghost themes can't ship content: Ghost ignores anything in the theme `.zip` besides templates and assets, so the demo posts come as a separate import file.
 
 ## Theme options (Design & branding)
 
