@@ -6,6 +6,8 @@ A theme for [Ghost](https://ghost.org) (≥ 5.0), based on the official [Source]
 
 ![Yaru theme for Ghost on desktop and mobile](docs/screenshots/preview.png)
 
+**[⬇ Download the latest release](https://github.com/renangabriel27/yaru-ghost/releases/latest)** and upload `yaru.zip` in Ghost Admin.
+
 ## Features
 
 - **Terminal prompt search**: type after `guest@localhost:~$` to filter posts by title, with a blinking orange cursor (`/` to focus, `Enter` to open, `Esc` to clear).
@@ -31,7 +33,7 @@ A theme for [Ghost](https://ghost.org) (≥ 5.0), based on the official [Source]
 
 ## Installation
 
-1. Download `dist/yaru.zip` (or build it with `npm run zip`).
+1. Download `yaru.zip` from the [latest release](https://github.com/renangabriel27/yaru-ghost/releases/latest) (or build it with `npm run zip`, which writes `dist/yaru.zip`).
 2. In Ghost Admin: **Settings → Design & branding → Customize → Change theme → Upload theme**.
 3. Activate the theme and adjust the options in **Design & branding → Customize**.
 4. Upload this repository's `routes.yaml` in **Settings → Labs → Routes → Upload routes file**. It creates the `/blog/` page (`blog.hbs` template): every post except the ones in the projects tag, with pagination and the category pills.
