@@ -1,0 +1,36 @@
+<p>Prompt engineering was about finding the magic words. <strong>Context engineering</strong> is about deciding what the model sees: which rules, which files, which tools, and when. For coding agents it matters more than the model you pick.</p>
+<h2 id="layers">The layers</h2>
+<table><thead><tr><th>Layer</th><th>Loaded</th><th>Example</th></tr></thead><tbody><tr><td>Rules</td><td>Always</td><td>"Commit messages in English"</td></tr><tr><td>Skills</td><td>On demand</td><td>"How we write service objects"</td></tr><tr><td>Tools</td><td>When called</td><td>Issue tracker, staging database, browser</td></tr><tr><td>Hooks</td><td>On events</td><td>Run the linter after every edit</td></tr></tbody></table>
+<h2 id="rules-file">Keep the rules file short</h2>
+<p>Everything in <code>AGENTS.md</code> or <code>CLAUDE.md</code> is read on every turn. Long files dilute the instructions that matter. Keep it to conventions that apply everywhere and point to skills for the rest.</p>
+<pre><code class="language-markdown"># Project rules
+
+- Ruby 3.4, Rails 8. Run `bin/rails test` before saying you&#x27;re done.
+- Business logic goes in `app/services`, one public `call` method.
+- Never edit files in `db/schema.rb` by hand; write a migration.
+- For anything about specs, load the `rspec` skill.</code></pre>
+<h2 id="skills">Skills: knowledge on demand</h2>
+<p>A skill is a folder with a <code>SKILL.md</code>. Its description is what the agent reads to decide whether to load it, so it has to say <em>when to use it</em> and <em>when not to</em>.</p>
+<pre><code class="language-markdown">---
+name: rails-services
+description: Conventions for service objects. Use whenever you implement business
+  logic that writes data, calls external APIs or spans a transaction.
+  Don&#x27;t use it for simple reads (see rails-queries).
+---
+
+# Service objects
+1. One public method: `call`.
+2. Return a result object; never raise for control flow.
+3. Wrap database writes in a transaction, never HTTP calls.</code></pre>
+<h2 id="hooks">Hooks: automatic feedback</h2>
+<pre><code class="language-json">{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Edit|Write&quot;,
+        &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bin/agent-lint&quot; }]
+      }
+    ]
+  }
+}</code></pre>
+<div class="kg-card kg-callout-card kg-callout-card-accent"><div class="kg-callout-emoji">💡</div><div class="kg-callout-text">Start with the skills that fix the mistakes you keep pointing out in code review. They pay for themselves in the first week.</div></div>

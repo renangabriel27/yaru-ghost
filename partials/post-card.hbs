@@ -1,0 +1,30 @@
+{{!-- A row of the numbered list. The number comes from a CSS counter (.gh-feed) --}}
+<article class="gh-card {{post_class}}">
+    <a class="gh-card-link" href="{{url}}">
+        <span class="gh-card-number" aria-hidden="true"></span>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">{{title}}</h3>
+            <footer class="gh-card-meta">
+                {{#unless access}}
+                    {{^has visibility="public"}}
+                        <span class="gh-card-lock" title="{{t "Members only"}}">{{> "icons/lock"}}</span>
+                    {{/has}}
+                {{/unless}}
+                {{#if primary_tag}}
+                    <span class="gh-card-tag">{{primary_tag.name}}</span>
+                {{/if}}
+                {{#if @custom.show_publish_date}}
+                    <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+                {{/if}}
+                {{#if @custom.show_reading_time}}
+                    {{#if reading_time}}
+                        <span class="gh-card-length">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+                    {{/if}}
+                {{/if}}
+                {{#if @custom.show_author}}
+                    <span class="gh-card-author">{{{t "By {authors}" authors=(authors autolink="false" separator=", ")}}}</span>
+                {{/if}}
+            </footer>
+        </div>
+    </a>
+</article>

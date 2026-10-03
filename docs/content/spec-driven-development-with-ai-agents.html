@@ -1,0 +1,23 @@
+<p>Asking a coding agent to "build this feature" works until the feature touches more than a handful of files. After that, the agent guesses what you meant, and guessing is expensive. <strong>Spec-Driven Development</strong> flips the order: write the spec first, then the code, with a human approval between every step.</p>
+<h2 id="the-flow">The flow</h2>
+<ol><li><strong>PRD:</strong> the problem, who it affects and numbered acceptance criteria (AC01, AC02…).</li><li><strong>Tech spec:</strong> alternatives with trade-offs, the recommendation, the design and a matrix linking every acceptance criterion to a test.</li><li><strong>Tasks:</strong> small, sequential deliverables, each with its own tests.</li><li><strong>Implementation:</strong> one task at a time, followed by an automated review against the project's conventions.</li></ol>
+<div class="kg-card kg-callout-card kg-callout-card-accent"><div class="kg-callout-emoji">🧭</div><div class="kg-callout-text">The golden rule: the agent never moves to the next phase on its own. Every phase ends with <em>“approved?”</em> and only continues on a yes.</div></div>
+<h2 id="everything-is-a-file">Everything is a file</h2>
+<p>Each phase produces a file that lives next to the code. The nice side effect: the pull request arrives with the <em>why</em> already written down.</p>
+<pre><code class="language-bash">docs/specs/pix-checkout/
+├── prd.md           # problem, scope and acceptance criteria
+├── techspec.md      # alternatives, decision and design
+├── tasks.md         # overview and progress
+├── 1_task.md        # one small deliverable, with tests
+├── 1_review.md      # automated review against the conventions
+└── .flow.yml        # flow state, so you can resume later</code></pre>
+<pre><code class="language-yaml">feature: pix-checkout
+phase: implement
+branch: feat/pix-checkout
+tasks:
+  - { n: 1, title: &quot;Create the Pix charge at checkout&quot;, status: done }
+  - { n: 2, title: &quot;Confirm payment through the webhook&quot;, status: in_progress }
+  - { n: 3, title: &quot;Show the payment status on the order&quot;, status: pending }</code></pre>
+<h2 id="what-changes">What changes day to day</h2>
+<ul><li><strong>Less rework:</strong> product questions show up in the PRD, not in code review.</li><li><strong>Smaller PRs:</strong> every task becomes a reviewable commit.</li><li><strong>Context that survives:</strong> you can pause and come back days later, because the state lives in a file.</li></ul>
+<blockquote>The agent writes code faster than I do. The spec makes sure it writes the right code.</blockquote>

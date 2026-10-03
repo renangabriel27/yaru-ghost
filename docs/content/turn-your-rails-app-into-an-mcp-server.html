@@ -1,0 +1,42 @@
+<p>The <a href="https://modelcontextprotocol.io">Model Context Protocol</a> lets AI assistants call tools you define. If your product runs on Rails, a small MCP endpoint lets an assistant search orders, read a customer's history or open a support ticket, with the same authorization rules as the rest of your app.</p>
+<h2 id="install">Install the SDK</h2>
+<pre><code class="language-bash">bundle add mcp</code></pre>
+<h2 id="a-tool">Define a tool</h2>
+<p>A tool is a class with a description, an input schema and a <code>call</code> method. The description is what the model reads to decide when to use it, so be specific.</p>
+<pre><code class="language-ruby">class SearchOrdersTool &lt; MCP::Tool
+  tool_name &quot;search_orders&quot;
+  description &quot;Search the current user&#x27;s orders by status or product name&quot;
+
+  input_schema(
+    properties: {
+      query: { type: &quot;string&quot; },
+      status: { type: &quot;string&quot;, enum: %w[pending paid shipped cancelled] }
+    },
+    required: [&quot;query&quot;]
+  )
+
+  annotations(read_only_hint: true)
+
+  def self.call(query:, server_context:, status: nil)
+    orders = server_context[:user].orders.search(query)
+    orders = orders.where(status:) if status
+
+    MCP::Tool::Response.new([{ type: &quot;text&quot;, text: orders.limit(20).to_json(only: %i[id status total]) }])
+  end
+end</code></pre>
+<h2 id="endpoint">Expose it from a controller</h2>
+<pre><code class="language-ruby">class McpController &lt; ActionController::API
+  include Authentication # your token-based auth
+
+  def create
+    server = MCP::Server.new(
+      name: &quot;shop&quot;,
+      tools: [SearchOrdersTool],
+      server_context: { user: Current.user }
+    )
+
+    render json: server.handle_json(request.body.read)
+  end
+end</code></pre>
+<h2 id="guardrails">Guardrails</h2>
+<ul><li><strong>Scope everything to the user.</strong> Pass the authenticated user through <code>server_context</code>, never trust IDs from the model.</li><li><strong>Start read-only.</strong> Mark tools with <code>read_only_hint</code> and add writes later, one at a time.</li><li><strong>Return less.</strong> Every byte you return goes into the model's context window.</li></ul>

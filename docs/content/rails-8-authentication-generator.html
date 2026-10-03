@@ -1,0 +1,25 @@
+<p>Rails 8 includes an authentication generator. It's not a gem you depend on: it writes plain code into your app, which you own and can change.</p>
+<pre><code class="language-bash">bin/rails generate authentication
+bin/rails db:migrate</code></pre>
+<h2 id="what-you-get">What you get</h2>
+<ul><li><code>User</code> with <code>has_secure_password</code> and a <code>Session</code> model, one row per signed-in device.</li><li>An <code>Authentication</code> concern with <code>require_authentication</code> and <code>allow_unauthenticated_access</code>.</li><li>Sign in, sign out and password reset by email, with rate limiting on the sign-in form.</li></ul>
+<pre><code class="language-ruby">class PostsController &lt; ApplicationController
+  allow_unauthenticated_access only: %i[index show]
+
+  def create
+    @post = Current.user.posts.create!(post_params)
+    redirect_to @post
+  end
+end</code></pre>
+<h2 id="what-to-add">What you still need to add</h2>
+<ol><li><strong>Sign up.</strong> The generator intentionally leaves registration to you.</li><li><strong>Email confirmation</strong>, if accounts must be verified.</li><li><strong>A "sign out everywhere" button</strong>: destroy every session of the user.</li></ol>
+<pre><code class="language-ruby">class RegistrationsController &lt; ApplicationController
+  allow_unauthenticated_access
+  rate_limit to: 10, within: 3.minutes, only: :create
+
+  def create
+    user = User.create!(params.expect(user: %i[email_address password password_confirmation]))
+    start_new_session_for(user)
+    redirect_to root_path
+  end
+end</code></pre>

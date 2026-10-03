@@ -1,0 +1,14 @@
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">📦</div><div class="kg-callout-text"><b>Stack:</b> Ruby, Rails generators, MCP Ruby SDK<br><b>License:</b> MIT<br><b>Status:</b> Beta<br><b>Repository:</b> <code>github.com/example/mcp_scaffold</code></div></div>
+<p>Rails generators that turn models and service objects into MCP tools, with an authenticated endpoint and tests. <em>Example project for the theme.</em></p>
+<pre><code class="language-bash">bin/rails generate mcp:install
+bin/rails generate mcp:tool SearchOrders query:string status:string --read-only</code></pre>
+<h2 id="what-it-generates">What it generates</h2>
+<ul><li><code>app/mcp/tools/search_orders_tool.rb</code> with the input schema already filled in.</li><li>A route and a controller that build the server with the current user in <code>server_context</code>.</li><li>A test that calls the tool through the endpoint.</li></ul>
+<pre><code class="language-ruby">class SearchOrdersToolTest &lt; ActionDispatch::IntegrationTest
+  test &quot;returns only the user&#x27;s orders&quot; do
+    response = call_mcp_tool &quot;search_orders&quot;, query: &quot;keyboard&quot;, as: users(:alice)
+
+    assert_equal [orders(:alice_keyboard).id], response.json.pluck(&quot;id&quot;)
+  end
+end</code></pre>
+<div class="kg-card kg-button-card kg-align-center"><a href="/turn-your-rails-app-into-an-mcp-server/" class="kg-btn kg-btn-accent">Read: Turn your Rails app into an MCP server</a></div>

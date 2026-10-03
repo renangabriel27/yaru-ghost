@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+
+    {{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
+    <title>{{meta_title page=(t " (Page %)")}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+
+    {{!-- Preload main styles and scripts for better performance --}}
+    <link rel="preload" as="style" href="{{asset "built/screen.css"}}">
+    <link rel="preload" as="script" href="{{asset "built/source.js"}}">
+
+    {{!-- Fonts are preloaded and defined in the default template to avoid layout shift --}}
+    {{> "typography/fonts"}}
+
+    <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}">
+
+    {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings, it should always be the last tag before the closing head tag --}}
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}}{{#if @custom.code_blocks_as_windows}} has-code-windows{{/if}}{{#if @custom.syntax_highlighting}} has-syntax-highlighting{{/if}}{{#match @custom.code_style "Ray.so"}} code-style-rayso{{/match}}{{#if @custom.show_blinking_cursor}} has-blinking-cursor{{/if}}">
+
+<div class="gh-viewport">
+
+    {{> "components/navigation"}}
+
+    {{{body}}}
+
+    {{> "components/footer"}}
+
+</div>
+
+{{#is "post, page"}}
+    {{> "lightbox"}}
+{{/is}}
+
+{{!-- Prism is bundled in source.js; main.js highlights only when the theme option is on --}}
+<script>window.Prism = window.Prism || {}; window.Prism.manual = true;</script>
+
+{{!-- Scripts - handle responsive videos, code windows, syntax highlighting and navigation dropdowns --}}
+<script src="{{asset "built/source.js"}}"></script>
+
+{{!-- Ghost outputs required functional scripts with this tag, it should always be the last thing before the closing body tag --}}
+{{ghost_foot}}
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+{{!--
+    Numbered post list.
+    Parameters:
+    * prompt (true/false) – shows the prompt line (with the title search) above the list
+--}}
+<section class="gh-container gh-outer{{#unless @custom.show_post_numbers}} no-numbers{{/unless}}">
+    <div class="gh-container-inner gh-inner">
+
+        {{#if prompt}}
+            {{> "prompt" command="ls -t posts/" search=true}}
+        {{/if}}
+
+        <div class="gh-feed" data-page="{{pagination.page}}" data-limit="{{pagination.limit}}">
+            {{#foreach posts}}
+                {{> "post-card"}}
+            {{/foreach}}
+        </div>
+
+        {{#if pagination}}
+            {{#match pagination.pages ">" 1}}
+                <nav class="gh-pagination" aria-label="{{t "Pagination"}}">
+                    {{#if pagination.prev}}
+                        <a href="{{page_url pagination.prev}}">{{t "← Newer posts"}}</a>
+                    {{else}}
+                        <span></span>
+                    {{/if}}
+                    <span class="gh-pagination-info">{{pagination.page}} / {{pagination.pages}}</span>
+                    {{#if pagination.next}}
+                        <a href="{{page_url pagination.next}}">{{t "Older posts →"}}</a>
+                    {{else}}
+                        <span></span>
+                    {{/if}}
+                </nav>
+            {{/match}}
+        {{/if}}
+
+    </div>
+</section>

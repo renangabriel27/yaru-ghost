@@ -1,0 +1,17 @@
+<p>Turbo 8 added <strong>page refreshes with morphing</strong>: instead of replacing the whole page, Turbo compares the new HTML with the current one and only changes what's different. Scroll position, focus and form state survive.</p>
+<h2 id="turn-it-on">Turn it on</h2>
+<pre><code class="language-erb">&lt;%# app/views/layouts/application.html.erb %&gt;
+&lt;%= turbo_refreshes_with method: :morph, scroll: :preserve %&gt;</code></pre>
+<h2 id="broadcast">Broadcast a refresh</h2>
+<p>Instead of crafting a Turbo Stream for every change, tell everyone looking at a record to refresh. Morphing makes it cheap.</p>
+<pre><code class="language-ruby">class Board &lt; ApplicationRecord
+  has_many :cards
+  broadcasts_refreshes
+end
+
+class Card &lt; ApplicationRecord
+  belongs_to :board, touch: true
+end</code></pre>
+<pre><code class="language-erb">&lt;%= turbo_stream_from @board %&gt;</code></pre>
+<h2 id="gotchas">Gotchas</h2>
+<ul><li>Elements with state you want to keep, like an open dropdown, need <code>data-turbo-permanent</code>.</li><li>Stimulus controllers reconnect on morph: keep <code>connect()</code> idempotent.</li><li>Broadcast refreshes are debounced, so a burst of changes becomes one refresh.</li></ul>

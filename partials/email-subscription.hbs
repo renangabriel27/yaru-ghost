@@ -1,0 +1,9 @@
+<form class="gh-form" data-members-form>
+    <input class="gh-form-input" id="{{email_field_id}}" name="email" type="email" placeholder="{{t "jamie@example.com"}}" aria-label="{{t "Your email address"}}" required data-members-email>
+    <button class="gh-button" type="submit">
+        <span>{{t "Subscribe"}}</span>
+        {{> "icons/loader"}}
+        <span>{{t "Email sent"}}</span>
+    </button>
+    <p class="gh-form-error" data-members-error></p>
+</form>

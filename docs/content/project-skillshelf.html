@@ -1,0 +1,20 @@
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">📦</div><div class="kg-callout-text"><b>Stack:</b> Go, GitHub API<br><b>License:</b> MIT<br><b>Status:</b> Active<br><b>Repository:</b> <code>github.com/example/skillshelf</code></div></div>
+<p>A CLI to share AI agent skills across a team: install them from a Git repository, keep them up to date and see who changed what. <em>Example project for the theme.</em></p>
+<pre><code class="language-bash">$ skillshelf add github.com/acme/agent-skills
+✔ 14 skills installed in ~/.claude/skills
+
+$ skillshelf outdated
+rails-services   1.2.0 → 1.3.0   &quot;Add transaction rules&quot;
+rspec            0.9.1 → 1.0.0   &quot;Spec tree before code&quot;
+
+$ skillshelf update</code></pre>
+<h2 id="why">Why</h2>
+<p>Skills copied by hand drift apart within a week. With a shelf, changing a skill is a pull request, and everyone gets the new version with one command.</p>
+<h2 id="config">Configuration</h2>
+<pre><code class="language-yaml"># .skillshelf.yml
+sources:
+  - repo: github.com/acme/agent-skills
+    ref: main
+target: ~/.claude/skills
+pin:
+  rspec: 0.9.1</code></pre>

@@ -1,0 +1,122 @@
+<p>This post collects <strong>the visual elements of the Yaru theme</strong> and <strong>the options you can change in the Ghost admin</strong>. Use it as a reference when writing: everything here comes out of Ghost's standard editor, with no special HTML.</p>
+
+<h2 id="palette">Palette</h2>
+<p>The theme follows Ubuntu 24.04's Yaru dark: charcoal surfaces, light text and the Ubuntu orange only in the details (cursor, active tab, links, buttons and focus).</p>
+<!--kg-card-begin: html-->
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;font-family:var(--font-mono);font-size:1.3rem;">
+  <div><div style="height:56px;border-radius:6px;background:#1d1d1d;border:1px solid #3d3d3d"></div><div style="margin-top:6px;color:#f6f6f6">Background</div><div style="color:#8f8f8f">#1d1d1d</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#242424;border:1px solid #3d3d3d"></div><div style="margin-top:6px;color:#f6f6f6">Surface</div><div style="color:#8f8f8f">#242424</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#303030;border:1px solid #3d3d3d"></div><div style="margin-top:6px;color:#f6f6f6">Headerbar</div><div style="color:#8f8f8f">#303030</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#171421;border:1px solid #3d3d3d"></div><div style="margin-top:6px;color:#f6f6f6">Terminal</div><div style="color:#8f8f8f">#171421</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#f6f6f6"></div><div style="margin-top:6px;color:#f6f6f6">Headings</div><div style="color:#8f8f8f">#f6f6f6</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#c4c4c4"></div><div style="margin-top:6px;color:#f6f6f6">Body</div><div style="color:#8f8f8f">#c4c4c4</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#8f8f8f"></div><div style="margin-top:6px;color:#f6f6f6">Secondary</div><div style="color:#8f8f8f">#8f8f8f</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#e95420"></div><div style="margin-top:6px;color:#f6f6f6">Ubuntu orange</div><div style="color:#8f8f8f">#e95420</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#8ae234"></div><div style="margin-top:6px;color:#f6f6f6">Prompt: user</div><div style="color:#8f8f8f">#8ae234</div></div>
+  <div><div style="height:56px;border-radius:6px;background:#729fcf"></div><div style="margin-top:6px;color:#f6f6f6">Prompt: path</div><div style="color:#8f8f8f">#729fcf</div></div>
+</div>
+<!--kg-card-end: html-->
+<p>The orange comes from Ghost's <strong>Accent color</strong> (Design &amp; branding → Brand). Recommended: <code>#E95420</code>.</p>
+
+<h2 id="typography">Typography</h2>
+<p>Text is set in <strong>Ubuntu Sans</strong>; code, metadata and prompts in <code>Ubuntu Sans Mono</code>. Both fonts ship with the theme. If you pick another font in Design &amp; branding → Typography, it replaces Ubuntu Sans.</p>
+<p>A paragraph with <strong>bold</strong>, <em>italic</em>, <a href="https://ubuntu.com">a link</a> and <code>inline code</code>. Body text uses a softer grey than headings, so long reads are easier on the eyes on a dark background.</p>
+<h2>Heading level 2</h2>
+<p>Use H2 for the main sections of a post.</p>
+<h3>Heading level 3</h3>
+<p>Use H3 for subsections.</p>
+<h4>Heading level 4</h4>
+<p>Use H4 for smaller groups.</p>
+
+<h2 id="lists">Lists</h2>
+<ul><li>Unordered list item</li><li>Second item with <strong>bold</strong></li><li>Third item</li></ul>
+<ol><li>First step</li><li>Second step<ol><li>Sub-step</li></ol></li><li>Third step</li></ol>
+
+<h2 id="quotes">Quotes</h2>
+<blockquote>Default quote: italic, light text and an accent-colored bar on the left.</blockquote>
+<aside>Alternative quote: larger and without the bar. In the editor, click the quote button twice.</aside>
+
+<h2 id="code">Code</h2>
+<p>With <code>code_blocks_as_windows</code> on, every code block becomes a GNOME window. The window title is the language picked in the editor's code card.</p>
+<p>With <code>syntax_highlighting</code> on, code gets the Ubuntu terminal colors: keywords, strings, numbers, functions, tags and properties, variables, and <em>comments</em> in grey. It works with JavaScript, TypeScript, JSX, HTML, CSS, SCSS, Handlebars, JSON, YAML, Markdown, Bash, Dockerfile, Nginx, INI, TOML, diff, SQL, GraphQL, Python, Ruby, ERB, PHP, Go, Rust, Java, Kotlin, C, C++, C#, Swift, Lua and Elixir.</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'</code></pre>
+<pre><code class="language-javascript">// Greeting with a template string
+const greet = (name, times = 1) =&gt; {
+  if (!name) return null;
+  return `Hello, ${name}!`.repeat(times);
+};</code></pre>
+<pre><code class="language-ruby">class Post &lt; ApplicationRecord
+  # Posts published in the last 30 days
+  scope :recent, -&gt; { where(published_at: 30.days.ago..) }
+
+  def short_title(limit = 40)
+    title.truncate(limit)
+  end
+end</code></pre>
+<pre><code class="language-css">.gh-content pre {
+  color: #e6e6e6;
+  background-color: var(--color-terminal-bg);
+  border-radius: 12px;
+}</code></pre>
+<p>To change how code blocks look, use the <code>code_style</code> option: <strong>Yaru</strong> or <strong>Ray.so</strong>.</p>
+<p>Without a language, the window is titled "Terminal":</p>
+<pre><code>$ uname -a
+Linux yaru 6.8.0-generic x86_64 GNU/Linux</code></pre>
+
+<h2 id="images">Images</h2>
+<figure class="kg-card kg-image-card kg-card-hascaption"><img src="{{img}}" class="kg-image" alt="Image at text width" width="1600" height="1000"><figcaption>Image at text width, with a caption.</figcaption></figure>
+<figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><img src="{{img}}" class="kg-image" alt="Wide image" width="1600" height="900"><figcaption>Wide image (the image card's <em>Wide</em> option).</figcaption></figure>
+<figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="{{img}}" width="800" height="600" alt=""></div><div class="kg-gallery-image"><img src="{{img}}" width="800" height="600" alt=""></div><div class="kg-gallery-image"><img src="{{img}}" width="800" height="600" alt=""></div></div></div><figcaption>A gallery with three images.</figcaption></figure>
+
+<h2 id="cards">Cards</h2>
+<div class="kg-card kg-callout-card kg-callout-card-accent"><div class="kg-callout-emoji">💡</div><div class="kg-callout-text">Accent callout, for tips and important notes.</div></div>
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">📌</div><div class="kg-callout-text">Grey callout, for neutral remarks.</div></div>
+<div class="kg-card kg-button-card kg-align-center"><a href="#/portal/signup" class="kg-btn kg-btn-accent">Accent button</a></div>
+<div class="kg-card kg-toggle-card" data-kg-toggle-state="close"><div class="kg-toggle-heading"><h4 class="kg-toggle-heading-text">Frequently asked question (toggle)</h4><button class="kg-toggle-card-icon"></button></div><div class="kg-toggle-content"><p>The answer stays hidden until the reader clicks.</p></div></div>
+<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://ghost.org/docs/themes/"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Ghost Themes — official documentation</div><div class="kg-bookmark-description">Bookmark card with a title, description, metadata and thumbnail.</div><div class="kg-bookmark-metadata"><span class="kg-bookmark-author">Ghost</span><span class="kg-bookmark-publisher">ghost.org</span></div></div><div class="kg-bookmark-thumbnail"><img src="{{img}}" alt=""></div></a></figure>
+<table><thead><tr><th>Element</th><th>Font</th><th>Color</th></tr></thead><tbody><tr><td>Headings</td><td>Ubuntu Sans</td><td><code>#f6f6f6</code></td></tr><tr><td>Body</td><td>Ubuntu Sans</td><td><code>#c4c4c4</code></td></tr><tr><td>Metadata</td><td>Ubuntu Sans Mono</td><td><code>#8f8f8f</code></td></tr></tbody></table>
+<hr>
+
+<h2 id="theme-options">Theme options</h2>
+<p>All of them live in <strong>Settings → Design &amp; branding → Customize</strong>, split across the panel's tabs.</p>
+<h3>Site-wide</h3>
+<ul>
+<li><code>terminal_prompt</code> — user@host of the terminal prompt (home, breadcrumb, tag, author, 404). Empty = just <code>~$</code>. <em>Default: <code>guest@localhost</code>.</em></li>
+<li><code>projects_tag</code> — Slug of the portfolio tag. Its posts are left out of <code>/blog/</code> and it doesn't show up in the category pills. <em>Default: <code>projects</code>.</em></li>
+<li><code>prompt_search</code> — Title search in the prompt on the home, tag and author pages: type after the <code>$</code> and the list is filtered. <code>/</code> focuses the search, <code>Enter</code> opens the first result and <code>Esc</code> clears it. <em>Default: on.</em></li>
+<li><code>show_blinking_cursor</code> — Blinking orange cursor in the search prompt. <em>Default: on.</em></li>
+<li><code>signup_heading</code> — Heading of the newsletter block (end of posts and footer). <em>Default: site title.</em></li>
+<li><code>signup_subheading</code> — Text of the newsletter block. <em>Default: site description.</em></li>
+<li><code>github_url</code> — Link to your GitHub profile. The icon shows up in the footer, after the social accounts set in Ghost. <em>Default: empty.</em></li>
+</ul>
+<h3>Homepage</h3>
+<ul>
+<li><code>show_home_intro</code> — Large intro sentence at the top of the home page. <em>Default: on.</em></li>
+<li><code>home_intro_text</code> — The intro sentence (only shown with the option above on). <em>Default: site description.</em></li>
+<li><code>show_post_numbers</code> — 01, 02… numbering in the post list. <em>Default: on.</em></li>
+<li><code>show_author</code> — "BY AUTHOR" in the list metadata. <em>Default: on.</em></li>
+<li><code>show_reading_time</code> — Reading time in the list. <em>Default: on.</em></li>
+<li><code>show_publish_date</code> — Publish date in the list. <em>Default: off.</em></li>
+</ul>
+<h3>Post</h3>
+<ul>
+<li><code>show_breadcrumb</code> — Prompt-style breadcrumb (<code>~/tag$</code>) at the top of posts and pages. <em>Default: on.</em></li>
+<li><code>code_blocks_as_windows</code> — Code blocks as GNOME windows, like the ones in the <a href="#code">Code</a> section. <em>Default: on.</em></li>
+<li><code>code_style</code> — Colors inside the code window: <strong>Yaru</strong> (Ubuntu terminal colors) or <strong>Ray.so</strong> (the same GNOME window, with a purple background, semibold text and pink, yellow, green and cyan colors). <em>Default: Yaru.</em></li>
+<li><code>syntax_highlighting</code> — Syntax colors in code blocks. <em>Default: on.</em></li>
+<li><code>show_post_signup</code> — Newsletter block at the end of posts. <em>Default: on.</em></li>
+<li><code>show_related_articles</code> — "Read next": three numbered posts that share tags with the current one. <em>Default: on.</em></li>
+</ul>
+
+<h2 id="recommended-setup">Recommended Ghost setup</h2>
+<ul>
+<li><strong>Accent color</strong>: <code>#E95420</code>.</li>
+<li><strong>Primary navigation</strong>: a few short items, such as Home, Blog, Projects and About. Categories live in the pills on the Blog and tag pages. The current page gets the orange bar; items that don't fit go into the <code>⋮</code> menu.</li>
+<li><strong>Secondary navigation</strong>: footer links (e.g. About, RSS, Subscribe → <code>#/portal/signup</code>).</li>
+<li><strong>Social accounts</strong> (Settings → General): filled-in accounts show up as icons in the footer. GitHub comes from the theme's <code>github_url</code> option.</li>
+<li><strong>Logo</strong>: optional. Without one, the title is set in mono, exactly as written in Ghost.</li>
+<li><strong>Language</strong>: Settings → General → Publication language. The theme ships with English and Brazilian Portuguese.</li>
+<li><strong>Tags</strong>: the primary tag shows up in the metadata and the breadcrumb; "Read next" uses shared tags.</li>
+<li><strong>Members</strong>: with members enabled, Sign in/Subscribe show up in the header along with the newsletter block.</li>
+</ul>

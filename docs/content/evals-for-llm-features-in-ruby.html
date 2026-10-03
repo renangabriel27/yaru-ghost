@@ -1,0 +1,30 @@
+<p>You can't write <code>expect(summary).to eq("...")</code> for an LLM feature. The output changes every run. But "it's non-deterministic" is not an excuse to ship without tests. You need <strong>evals</strong>: a dataset of real cases and checks that measure how often the feature gets them right.</p>
+<h2 id="dataset">Start with a dataset</h2>
+<p>Twenty real examples beat two hundred synthetic ones. Pull them from production logs and write down what a good answer must contain.</p>
+<pre><code class="language-yaml">- input: &quot;Order #4821 arrived broken, I want my money back&quot;
+  expect:
+    intent: refund
+    mentions: [&quot;4821&quot;]
+- input: &quot;Can I change the delivery address?&quot;
+  expect:
+    intent: change_address</code></pre>
+<h2 id="checks">Cheap checks first</h2>
+<p>Most of the value comes from deterministic checks on structured output. Use an LLM as a judge only for what code can't check.</p>
+<pre><code class="language-ruby">RSpec.describe SupportTriage, :eval do
+  cases = YAML.load_file(&quot;spec/evals/support_triage.yml&quot;, symbolize_names: true)
+
+  it &quot;classifies at least 90% of the cases correctly&quot; do
+    results = cases.map do |example|
+      output = SupportTriage.call(example[:input])
+
+      output.intent == example.dig(:expect, :intent) &amp;&amp;
+        Array(example.dig(:expect, :mentions)).all? { output.summary.include?(it) }
+    end
+
+    accuracy = results.count(true).fdiv(results.size)
+    expect(accuracy).to be &gt;= 0.9
+  end
+end</code></pre>
+<h2 id="when-to-run">When to run them</h2>
+<ul><li>On every change to a prompt, model or retrieval step.</li><li>Nightly, against the current model version, to catch provider-side drift.</li><li>Keep them out of the regular suite: they're slower and cost money.</li></ul>
+<div class="kg-card kg-callout-card kg-callout-card-accent"><div class="kg-callout-emoji">📈</div><div class="kg-callout-text">Track the score over time. A prompt change that moves accuracy from 92% to 85% is a regression, even if every unit test is green.</div></div>

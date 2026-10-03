@@ -1,0 +1,23 @@
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">📦</div><div class="kg-callout-text"><b>Stack:</b> JavaScript, Stimulus, Turbo<br><b>License:</b> MIT<br><b>Status:</b> Active<br><b>Repository:</b> <code>github.com/example/turbo-palette</code></div></div>
+<p>A ⌘K command palette for Hotwire apps: one Stimulus controller, server-rendered results and keyboard navigation. <em>Example project for the theme.</em></p>
+<pre><code class="language-javascript">import { Controller } from &quot;@hotwired/stimulus&quot;;
+
+export default class extends Controller {
+  static targets = [&quot;dialog&quot;, &quot;input&quot;];
+
+  open(event) {
+    if (event.key === &quot;k&quot; &amp;&amp; (event.metaKey || event.ctrlKey)) {
+      event.preventDefault();
+      this.dialogTarget.showModal();
+      this.inputTarget.focus();
+    }
+  }
+}</code></pre>
+<pre><code class="language-erb">&lt;div data-controller=&quot;palette&quot; data-action=&quot;keydown@window-&gt;palette#open&quot;&gt;
+  &lt;dialog data-palette-target=&quot;dialog&quot;&gt;
+    &lt;%= form_with url: palette_path, method: :get, data: { turbo_frame: &quot;palette_results&quot; } do |f| %&gt;
+      &lt;%= f.search_field :q, data: { palette_target: &quot;input&quot; } %&gt;
+    &lt;% end %&gt;
+    &lt;turbo-frame id=&quot;palette_results&quot;&gt;&lt;/turbo-frame&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;</code></pre>

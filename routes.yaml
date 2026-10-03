@@ -1,0 +1,18 @@
+# Routes for the Yaru theme. Upload this file in Settings → Labs → Routes → Upload routes file.
+# /blog/ lists every post except the ones tagged as projects, with pagination and the category pills (blog.hbs).
+# If your portfolio tag has another slug, change "projects" here and in the theme's "Projects tag" option.
+
+routes:
+  /blog/:
+    controller: channel
+    filter: tag:-projects
+    template: blog
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

@@ -1,0 +1,44 @@
+<footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+        {{!-- Newsletter: on posts it's already shown at the end of the article --}}
+        {{#if @site.members_enabled}}
+            {{#unless @member}}
+                {{#is "post"}}
+                    {{#unless @custom.show_post_signup}}
+                        {{> "signup" email_field_id="footer-email" class="gh-footer-signup"}}
+                    {{/unless}}
+                {{else}}
+                    {{> "signup" email_field_id="footer-email" class="gh-footer-signup"}}
+                {{/is}}
+            {{/unless}}
+        {{/if}}
+
+        <nav class="gh-footer-menu">
+            {{navigation type="secondary"}}
+        </nav>
+
+        <div class="gh-social-links">
+            {{#social_accounts @site}}
+                <a href="{{href}}" target="_blank" rel="noopener" aria-label="{{name}}">
+                    {{#> (concat "icons/" type)}}
+                        <span>{{name}}</span>
+                    {{/undefined}}
+                </a>
+            {{/social_accounts}}
+            {{!-- GitHub isn't one of Ghost's social accounts: it comes from the theme's github_url option --}}
+            {{#if @custom.github_url}}
+                <a href="{{@custom.github_url}}" target="_blank" rel="noopener" aria-label="GitHub">{{> "icons/github"}}</a>
+            {{/if}}
+        </div>
+
+        <p class="gh-footer-tagline">
+            {{@site.title}}{{#if @site.description}} — {{@site.description}}{{/if}}
+        </p>
+
+        <p class="gh-footer-copyright">
+            {{{t "Powered by {ghostlink}" ghostlink="<a href=\"https://ghost.org/\" target=\"_blank\" rel=\"noopener\">Ghost</a>"}}}
+        </p>
+
+    </div>
+</footer>

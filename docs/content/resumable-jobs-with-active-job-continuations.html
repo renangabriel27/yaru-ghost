@@ -1,0 +1,30 @@
+<p>A long job that gets interrupted by a deploy usually starts over from scratch. With <strong>Active Job Continuations</strong>, introduced in Rails 8.1, a job is split into steps and remembers a cursor, so a restart picks up where it stopped.</p>
+<pre><code class="language-ruby">class ImportCustomersJob &lt; ApplicationJob
+  include ActiveJob::Continuable
+
+  def perform(import_id)
+    @import = Import.find(import_id)
+
+    step :validate do
+      @import.validate_file!
+    end
+
+    step :process do |step|
+      @import.rows.find_each(start: step.cursor) do |row|
+        Customer.upsert_from(row)
+        step.advance! from: row.id
+      end
+    end
+
+    step :finalize
+  end
+
+  private
+
+  def finalize
+    @import.update!(finished_at: Time.current)
+  end
+end</code></pre>
+<h2 id="how">How it works</h2>
+<ul><li>Completed steps are skipped when the job runs again.</li><li><code>step.cursor</code> holds the progress inside a step; <code>advance!</code> moves it forward.</li><li>When the worker is shutting down, the job stops at the next checkpoint and is re-enqueued.</li></ul>
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">⚠️</div><div class="kg-callout-text">Each piece of work inside a step still has to be idempotent: the last row before an interruption may be processed twice.</div></div>

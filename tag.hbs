@@ -1,0 +1,25 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+<main class="gh-main">
+
+    {{#tag}}
+        <section class="gh-archive gh-outer">
+            <div class="gh-inner">
+                {{> "prompt" path=slug pathUrl=url command="ls" search=true filter=(concat "tag:" slug)}}
+                <h1 class="gh-archive-title is-title">{{name}}</h1>
+                {{#if description}}
+                    <p class="gh-archive-description">{{description}}</p>
+                {{/if}}
+                {{!-- Category pills on every tag page except the projects tag --}}
+                {{#match slug @custom.projects_tag}}{{else}}
+                    {{> "tag-pills"}}
+                {{/match}}
+                <p class="gh-archive-count">{{plural ../pagination.total empty=(t "No posts") singular=(t "1 post") plural=(t "% posts")}}</p>
+            </div>
+        </section>
+    {{/tag}}
+
+    {{> "components/post-list"}}
+
+</main>

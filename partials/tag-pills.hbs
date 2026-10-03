@@ -1,0 +1,17 @@
+{{!--
+    "#tag" pills to filter the blog by category.
+    Lists the public tags that have posts (except the projects tag), from most to fewest posts.
+    The pill for the current page (tag or /blog/) gets the nav-current class from the link_class helper.
+--}}
+{{#get "tags" limit="100" filter="visibility:public+slug:-{{@custom.projects_tag}}" include="count.posts" order="count.posts desc"}}
+    {{#if tags}}
+        <nav class="gh-pills" aria-label="{{t "Categories"}}">
+            <a class="{{link_class for="/blog/" class="gh-pill"}}" href="{{@site.url}}/blog/">#{{t "all"}}</a>
+            {{#foreach tags}}
+                {{#match count.posts ">" 0}}
+                    <a class="{{link_class for=(url) class="gh-pill"}}" href="{{url}}">#{{slug}}<span class="gh-pill-count">{{count.posts}}</span></a>
+                {{/match}}
+            {{/foreach}}
+        </nav>
+    {{/if}}
+{{/get}}

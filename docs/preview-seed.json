@@ -1,0 +1,337 @@
+{
+  "site": {
+    "title": "dev@localhost",
+    "description": "Notes on Ruby on Rails, AI-assisted development and open source.",
+    "accent_color": "#E95420",
+    "locale": "en",
+    "facebook": null,
+    "twitter": null,
+    "bluesky": "dev.bsky.social",
+    "linkedin": "dev"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "label": "Projects",
+      "url": "/tag/projects/"
+    },
+    {
+      "label": "About",
+      "url": "/about/"
+    }
+  ],
+  "secondary_navigation": [
+    {
+      "label": "About",
+      "url": "/about/"
+    },
+    {
+      "label": "Uses",
+      "url": "/uses/"
+    },
+    {
+      "label": "Contact",
+      "url": "/contact/"
+    },
+    {
+      "label": "RSS",
+      "url": "/rss/"
+    },
+    {
+      "label": "Subscribe",
+      "url": "#/portal/signup"
+    }
+  ],
+  "author": {
+    "name": "Dev",
+    "slug": "dev",
+    "bio": "Software engineer. Writes about Ruby on Rails, AI-assisted development and open source.",
+    "location": "Earth",
+    "website": "https://github.com",
+    "profile_image": "picsum:avatar:400x400",
+    "cover_image": "picsum:author:2000x800"
+  },
+  "tags": [
+    {
+      "name": "AI",
+      "slug": "ai",
+      "description": "AI in software development: agents, Spec-Driven Development, MCP and evals."
+    },
+    {
+      "name": "Rails",
+      "slug": "rails",
+      "description": "Ruby on Rails: Rails 8, jobs, authentication and architecture."
+    },
+    {
+      "name": "Hotwire",
+      "slug": "hotwire",
+      "description": "Turbo and Stimulus."
+    },
+    {
+      "name": "DevOps",
+      "slug": "devops",
+      "description": "Docker, Kamal and CI."
+    },
+    {
+      "name": "Testing",
+      "slug": "testing",
+      "description": "Tests and evals."
+    },
+    {
+      "name": "Career",
+      "slug": "career",
+      "description": "Code review, teamwork and lessons learned."
+    },
+    {
+      "name": "Design",
+      "slug": "design",
+      "description": "Themes, typography and interfaces."
+    },
+    {
+      "name": "Projects",
+      "slug": "projects",
+      "description": "Open source projects: tools for Rails and AI workflows."
+    }
+  ],
+  "posts": [
+    {
+      "title": "Spec-Driven Development: shipping features with AI agents",
+      "slug": "spec-driven-development-with-ai-agents",
+      "custom_excerpt": "PRD, tech spec, tasks and reviewed implementation, with a human approval between every step.",
+      "tags": [
+        "AI"
+      ],
+      "featured": true,
+      "feature_image": "pool",
+      "html_file": "content/spec-driven-development-with-ai-agents.html"
+    },
+    {
+      "title": "skillshelf: share AI agent skills across your team",
+      "slug": "project-skillshelf",
+      "custom_excerpt": "A CLI to install, update and version agent skills from a Git repository.",
+      "tags": [
+        "Projects",
+        "AI"
+      ],
+      "featured": true,
+      "feature_image": "pool",
+      "html_file": "content/project-skillshelf.html"
+    },
+    {
+      "title": "Rails 8 without Redis: Solid Queue, Solid Cache and Solid Cable",
+      "slug": "rails-8-without-redis",
+      "custom_excerpt": "Jobs, cache and WebSockets on top of the database you already have.",
+      "tags": [
+        "Rails"
+      ],
+      "featured": true,
+      "feature_image": "pool",
+      "html_file": "content/rails-8-without-redis.html"
+    },
+    {
+      "title": "Turn your Rails app into an MCP server",
+      "slug": "turn-your-rails-app-into-an-mcp-server",
+      "custom_excerpt": "Let AI assistants call your app's features, with the same authorization as the rest of it.",
+      "tags": [
+        "AI",
+        "Rails"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/turn-your-rails-app-into-an-mcp-server.html"
+    },
+    {
+      "title": "mcp_scaffold: generators for MCP tools in Rails",
+      "slug": "project-mcp-scaffold",
+      "custom_excerpt": "Turn models and services into MCP tools, with an authenticated endpoint and tests.",
+      "tags": [
+        "Projects",
+        "Rails"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/project-mcp-scaffold.html"
+    },
+    {
+      "title": "Context engineering for coding agents",
+      "slug": "context-engineering-for-coding-agents",
+      "custom_excerpt": "Rules, skills, tools and hooks: deciding what the model sees matters more than the model.",
+      "tags": [
+        "AI"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/context-engineering-for-coding-agents.html"
+    },
+    {
+      "title": "Deploying Rails with Kamal 2",
+      "slug": "deploying-rails-with-kamal-2",
+      "custom_excerpt": "Zero-downtime deploys and automatic HTTPS on any server you can SSH into.",
+      "tags": [
+        "Rails",
+        "DevOps"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/deploying-rails-with-kamal-2.html"
+    },
+    {
+      "title": "Evals for LLM features in Ruby",
+      "slug": "evals-for-llm-features-in-ruby",
+      "custom_excerpt": "You can't assert on non-deterministic output, but you can measure it.",
+      "tags": [
+        "AI",
+        "Testing"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/evals-for-llm-features-in-ruby.html"
+    },
+    {
+      "title": "evalspec: RSpec matchers for LLM evals",
+      "slug": "project-evalspec",
+      "custom_excerpt": "YAML datasets, accuracy thresholds and reports you can diff between runs.",
+      "tags": [
+        "Projects",
+        "Testing"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/project-evalspec.html"
+    },
+    {
+      "title": "The Rails 8 authentication generator",
+      "slug": "rails-8-authentication-generator",
+      "custom_excerpt": "What you get out of the box, and what you still need to add.",
+      "tags": [
+        "Rails"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/rails-8-authentication-generator.html"
+    },
+    {
+      "title": "Resumable jobs with Active Job Continuations",
+      "slug": "resumable-jobs-with-active-job-continuations",
+      "custom_excerpt": "Long jobs that survive deploys and pick up where they stopped.",
+      "tags": [
+        "Rails"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/resumable-jobs-with-active-job-continuations.html"
+    },
+    {
+      "title": "kamal-previews: a preview app for every pull request",
+      "slug": "project-kamal-previews",
+      "custom_excerpt": "Per-PR environments on a single server, destroyed when the PR closes.",
+      "tags": [
+        "Projects",
+        "DevOps"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/project-kamal-previews.html"
+    },
+    {
+      "title": "Prompt caching: cut LLM costs without changing your product",
+      "slug": "prompt-caching-cut-llm-costs",
+      "custom_excerpt": "Stop paying for the same prompt prefix on every request.",
+      "tags": [
+        "AI"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/prompt-caching-cut-llm-costs.html"
+    },
+    {
+      "title": "Turbo morphing in practice",
+      "slug": "turbo-morphing-in-practice",
+      "custom_excerpt": "Page refreshes that keep scroll, focus and form state, with one line of config.",
+      "tags": [
+        "Rails",
+        "Hotwire"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/turbo-morphing-in-practice.html"
+    },
+    {
+      "title": "turbo-palette: a ⌘K command palette for Hotwire",
+      "slug": "project-turbo-palette",
+      "custom_excerpt": "One Stimulus controller, server-rendered results and keyboard navigation.",
+      "tags": [
+        "Projects",
+        "Hotwire"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/project-turbo-palette.html"
+    },
+    {
+      "title": "Code review tips that make everyone better",
+      "slug": "code-review-tips",
+      "custom_excerpt": "Small PRs, questions instead of assertions and prefixes that show how much a comment weighs.",
+      "tags": [
+        "Career"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/code-review-tips.html"
+    },
+    {
+      "title": "yaru-ghost: a Ghost theme inspired by Ubuntu",
+      "slug": "project-yaru-ghost",
+      "custom_excerpt": "A dark theme with a terminal prompt, GTK tabs and code blocks as GNOME windows.",
+      "tags": [
+        "Projects",
+        "Design"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "content/project-yaru-ghost.html"
+    },
+    {
+      "title": "Yaru theme style guide",
+      "slug": "style-guide",
+      "custom_excerpt": "Palette, typography, editor cards and every theme option in one place.",
+      "tags": [
+        "Design"
+      ],
+      "featured": false,
+      "feature_image": "pool",
+      "html_file": "style-guide.html"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Blog",
+      "slug": "blog",
+      "custom_excerpt": "Rails, AI-assisted development and open source. Pick a category to filter.",
+      "html": "<p>Title and description of the /blog/ page. The content of this page isn't shown on the site.</p>"
+    },
+    {
+      "title": "About",
+      "slug": "about",
+      "html_file": "content/about.html",
+      "feature_image": "pool"
+    },
+    {
+      "title": "Uses",
+      "slug": "uses",
+      "html_file": "content/uses.html"
+    },
+    {
+      "title": "Contact",
+      "slug": "contact",
+      "html_file": "content/contact.html"
+    }
+  ]
+}

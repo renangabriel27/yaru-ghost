@@ -1,0 +1,89 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#post}}
+
+<main class="gh-main">
+
+    <article class="gh-article {{post_class}}">
+
+        <header class="gh-article-header gh-canvas">
+
+            {{#if @custom.show_breadcrumb}}
+                <nav class="gh-breadcrumb" aria-label="{{t "Breadcrumb"}}">
+                    {{#if primary_tag}}
+                        {{> "prompt" path=primary_tag.slug pathUrl=primary_tag.url command=(concat "cat " slug ".md")}}
+                    {{else}}
+                        {{> "prompt" command=(concat "cat " slug ".md")}}
+                    {{/if}}
+                </nav>
+            {{/if}}
+
+            <h1 class="gh-article-title is-title">{{title}}</h1>
+
+            {{#if custom_excerpt}}
+                <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+
+            <div class="gh-article-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="LL"}}</time>
+                {{#if reading_time}}
+                    <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+                {{/if}}
+                <span>{{{t "By {authors}" authors=(authors separator=", ")}}}</span>
+            </div>
+
+            {{#if tags}}
+                <div class="gh-article-tags">
+                    {{#foreach tags}}
+                        <a class="gh-pill" href="{{url}}" title="{{name}}">{{slug}}</a>
+                    {{/foreach}}
+                </div>
+            {{/if}}
+
+            {{> "feature-image"}}
+
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            {{content}}
+        </section>
+
+        {{#if @custom.show_post_signup}}
+            {{#if @site.members_enabled}}
+                {{#unless @member}}
+                    <div class="gh-canvas">
+                        {{> "signup" email_field_id="post-email" class="gh-post-signup"}}
+                    </div>
+                {{/unless}}
+            {{/if}}
+        {{/if}}
+
+    </article>
+
+    {{#if comments}}
+        <div class="gh-comments gh-canvas">
+            {{comments mode="dark"}}
+        </div>
+    {{/if}}
+
+</main>
+
+{{/post}}
+
+{{#if @custom.show_related_articles}}
+    {{#get "posts" include="authors,tags" filter="tags:[{{post.tags}}]+id:-{{post.id}}" limit="3" as |related|}}
+        {{#if related}}
+            <section class="gh-container gh-related-posts gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-section-title">{{t "Read next"}}</h2>
+                    <div class="gh-feed gh-related">
+                        {{#foreach related}}
+                            {{> "post-card"}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            </section>
+        {{/if}}
+    {{/get}}
+{{/if}}

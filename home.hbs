@@ -1,0 +1,18 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+<main class="gh-main">
+
+    {{#if @custom.show_home_intro}}
+        <section class="gh-intro gh-outer">
+            <div class="gh-inner">
+                <h1 class="gh-intro-title is-title">
+                    {{#if @custom.home_intro_text}}{{@custom.home_intro_text}}{{else}}{{@site.description}}{{/if}}
+                </h1>
+            </div>
+        </section>
+    {{/if}}
+
+    {{> "components/post-list" prompt=true}}
+
+</main>

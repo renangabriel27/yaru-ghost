@@ -1,0 +1,42 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+<main class="gh-main">
+
+    {{#author}}
+        <section class="gh-archive is-author gh-outer">
+            <div class="gh-inner">
+                {{> "prompt" command=(concat "whoami " slug) search=true filter=(concat "author:" slug)}}
+                <div class="gh-archive-author">
+                    <div class="gh-archive-avatar">
+                        {{#if profile_image}}
+                            <img src="{{img_url profile_image size="s"}}" alt="{{name}}">
+                        {{else}}
+                            {{> "icons/avatar"}}
+                        {{/if}}
+                    </div>
+                    <div>
+                        <h1 class="gh-archive-title is-title">{{name}}</h1>
+                        {{#if bio}}
+                            <p class="gh-archive-description">{{bio}}</p>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="gh-archive-count">
+                    <span>{{plural ../pagination.total empty=(t "No posts") singular=(t "1 post") plural=(t "% posts")}}</span>
+                    {{#if location}}<span>{{location}}</span>{{/if}}
+                    {{#if website}}<a href="{{website}}" target="_blank" rel="noopener">{{t "Website"}}</a>{{/if}}
+                    {{#if twitter}}<a href="{{social_url type="twitter"}}" target="_blank" rel="noopener">X</a>{{/if}}
+                    {{#if linkedin}}<a href="{{social_url type="linkedin"}}" target="_blank" rel="noopener">LinkedIn</a>{{/if}}
+                    {{#if bluesky}}<a href="{{social_url type="bluesky"}}" target="_blank" rel="noopener">Bluesky</a>{{/if}}
+                    {{#if mastodon}}<a href="{{social_url type="mastodon"}}" target="_blank" rel="noopener">Mastodon</a>{{/if}}
+                    {{#if instagram}}<a href="{{social_url type="instagram"}}" target="_blank" rel="noopener">Instagram</a>{{/if}}
+                    {{#if youtube}}<a href="{{social_url type="youtube"}}" target="_blank" rel="noopener">YouTube</a>{{/if}}
+                </div>
+            </div>
+        </section>
+    {{/author}}
+
+    {{> "components/post-list"}}
+
+</main>

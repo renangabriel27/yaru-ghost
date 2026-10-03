@@ -1,0 +1,36 @@
+<p>Kamal deploys Docker containers to any server you can SSH into. Version 2 ships with <strong>kamal-proxy</strong>, which handles zero-downtime deploys and automatic HTTPS, so a VPS and a domain are all you need.</p>
+<h2 id="config">The whole config</h2>
+<pre><code class="language-yaml"># config/deploy.yml
+service: shop
+image: acme/shop
+
+servers:
+  web:
+    - 203.0.113.10
+  job:
+    hosts:
+      - 203.0.113.10
+    cmd: bin/jobs
+
+proxy:
+  ssl: true
+  host: shop.example.com
+
+registry:
+  username: acme
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  secret:
+    - RAILS_MASTER_KEY</code></pre>
+<h2 id="deploy">Deploying</h2>
+<pre><code class="language-bash">kamal setup     # first time: installs Docker, boots the proxy and the app
+kamal deploy    # every time after that
+kamal app logs -f
+kamal rollback &lt;version&gt;</code></pre>
+<h2 id="secrets">Secrets</h2>
+<p>Secrets go in <code>.kamal/secrets</code>, which can read them from a password manager instead of storing them in plain text:</p>
+<pre><code class="language-bash">KAMAL_REGISTRY_PASSWORD=$(op read &quot;op://Deploy/registry/password&quot;)
+RAILS_MASTER_KEY=$(cat config/master.key)</code></pre>
+<div class="kg-card kg-toggle-card" data-kg-toggle-state="close"><div class="kg-toggle-heading"><h4 class="kg-toggle-heading-text">Do I need Kubernetes?</h4><button class="kg-toggle-card-icon"></button></div><div class="kg-toggle-content"><p>Probably not. A couple of well-sized servers behind Kamal handle a lot of traffic, and you can read the entire deployment setup in one file.</p></div></div>

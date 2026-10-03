@@ -1,0 +1,8 @@
+{{!-- Newsletter block. Parameters: email_field_id, class --}}
+<section class="gh-signup {{class}}">
+    <div class="gh-signup-text">
+        <h2 class="gh-signup-heading is-title">{{#if @custom.signup_heading}}{{@custom.signup_heading}}{{else}}{{@site.title}}{{/if}}</h2>
+        <p class="gh-signup-subheading">{{#if @custom.signup_subheading}}{{@custom.signup_subheading}}{{else}}{{@site.description}}{{/if}}</p>
+    </div>
+    {{> "email-subscription" email_field_id=email_field_id}}
+</section>

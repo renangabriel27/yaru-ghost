@@ -1,0 +1,25 @@
+{{!< default}}
+{{!-- Blog: every post except the projects tag (/blog/ route in routes.yaml, channel controller) --}}
+
+<main class="gh-main">
+
+    <section class="gh-archive gh-outer">
+        <div class="gh-inner">
+            {{> "prompt" path="blog" command="ls" search=true filter=(concat "tag:-" @custom.projects_tag)}}
+            {{!-- Title and description come from the page with the "blog" slug, if there is one --}}
+            {{#get "pages" filter="slug:blog" limit="1"}}
+                {{#foreach pages}}
+                    <h1 class="gh-archive-title is-title">{{title}}</h1>
+                    {{#if custom_excerpt}}<p class="gh-archive-description">{{custom_excerpt}}</p>{{/if}}
+                {{else}}
+                    <h1 class="gh-archive-title is-title">{{t "Blog"}}</h1>
+                {{/foreach}}
+            {{/get}}
+            {{> "tag-pills"}}
+            <p class="gh-archive-count">{{plural pagination.total empty=(t "No posts") singular=(t "1 post") plural=(t "% posts")}}</p>
+        </div>
+    </section>
+
+    {{> "components/post-list"}}
+
+</main>

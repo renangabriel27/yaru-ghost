@@ -1,0 +1,22 @@
+<p>Most LLM features send the same long prefix on every request: system prompt, tool definitions, a few reference documents. Then they pay for those tokens again and again. <strong>Prompt caching</strong> lets the provider reuse that prefix, which usually cuts both cost and latency.</p>
+<h2 id="how">How it works</h2>
+<p>You mark the end of the stable part of the prompt. Requests that start with exactly the same prefix read it from the cache instead of processing it again.</p>
+<pre><code class="language-json">{
+  &quot;model&quot;: &quot;your-model-id&quot;,
+  &quot;max_tokens&quot;: 1024,
+  &quot;system&quot;: [
+    {
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;text&quot;: &quot;You are a support assistant for Acme. &lt;500 lines of policies&gt;&quot;,
+      &quot;cache_control&quot;: { &quot;type&quot;: &quot;ephemeral&quot; }
+    }
+  ],
+  &quot;messages&quot;: [
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Can I return an opened item?&quot; }
+  ]
+}</code></pre>
+<h2 id="order">Order matters</h2>
+<ol><li>Tools and system prompt first: they almost never change.</li><li>Reference documents next.</li><li>The conversation last: it changes every turn.</li></ol>
+<p>Anything dynamic before the cache breakpoint, like a timestamp or the user's name, invalidates the cache for everyone.</p>
+<div class="kg-card kg-toggle-card" data-kg-toggle-state="close"><div class="kg-toggle-heading"><h4 class="kg-toggle-heading-text">Does caching change the answers?</h4><button class="kg-toggle-card-icon"></button></div><div class="kg-toggle-content"><p>No. The model sees the same tokens; caching only skips reprocessing a prefix it has already seen.</p></div></div>
+<div class="kg-card kg-toggle-card" data-kg-toggle-state="close"><div class="kg-toggle-heading"><h4 class="kg-toggle-heading-text">How do I know it's working?</h4><button class="kg-toggle-card-icon"></button></div><div class="kg-toggle-content"><p>Check the usage block of each response. Cached requests report tokens read from the cache separately from regular input tokens.</p></div></div>

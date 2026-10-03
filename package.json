@@ -1,0 +1,183 @@
+{
+    "name": "yaru",
+    "description": "A clean, minimal dark theme inspired by Ubuntu 24.04 (Yaru dark).",
+    "version": "1.0.0",
+    "engines": {
+        "ghost": ">=5.0.0",
+        "node": ">=22.12.0"
+    },
+    "license": "MIT",
+    "scripts": {
+        "dev": "gulp",
+        "build": "gulp build",
+        "zip": "gulp zip",
+        "test": "gscan .",
+        "test:ci": "gscan --fatal --verbose ."
+    },
+    "author": {
+        "name": "Renan",
+        "email": "renanwebdev@gmail.com"
+    },
+    "gpm": {
+        "type": "theme",
+        "categories": [
+            "Minimal",
+            "Blog"
+        ]
+    },
+    "keywords": [
+        "ghost",
+        "theme",
+        "ghost-theme"
+    ],
+    "devDependencies": {
+        "@tryghost/theme-translations": "0.0.22",
+        "autoprefixer": "10.6.1",
+        "beeper": "2.1.0",
+        "cssnano": "9.0.5",
+        "gscan": "6.6.1",
+        "gulp": "5.0.1",
+        "gulp-concat": "2.6.1",
+        "gulp-livereload": "4.0.2",
+        "gulp-postcss": "10.0.0",
+        "gulp-uglify": "3.0.2",
+        "gulp-zip": "6.1.0",
+        "postcss": "8.5.28",
+        "postcss-easy-import": "4.0.0",
+        "prismjs": "1.30.0",
+        "pump": "3.0.4"
+    },
+    "browserslist": [
+        "defaults"
+    ],
+    "config": {
+        "posts_per_page": 5,
+        "image_sizes": {
+            "xs": {
+                "width": 160
+            },
+            "s": {
+                "width": 320
+            },
+            "m": {
+                "width": 600
+            },
+            "l": {
+                "width": 960
+            },
+            "xl": {
+                "width": 1200
+            },
+            "xxl": {
+                "width": 2000
+            }
+        },
+        "card_assets": true,
+        "custom": {
+            "terminal_prompt": {
+                "type": "text",
+                "default": "guest@localhost",
+                "description": "user@host of the terminal prompt (breadcrumb and top of the home page)"
+            },
+            "projects_tag": {
+                "type": "text",
+                "default": "projects",
+                "description": "Slug of the portfolio tag: left out of /blog/ and of the category pills"
+            },
+            "prompt_search": {
+                "type": "boolean",
+                "default": true,
+                "description": "Search posts by title in the prompt on the home, tag and author pages"
+            },
+            "show_blinking_cursor": {
+                "type": "boolean",
+                "default": true,
+                "description": "Blinking orange cursor in the search prompt"
+            },
+            "signup_heading": {
+                "type": "text",
+                "description": "Heading of the newsletter block (end of posts and footer); default: site title"
+            },
+            "signup_subheading": {
+                "type": "text",
+                "description": "Text of the newsletter block; default: site description"
+            },
+            "github_url": {
+                "type": "text",
+                "description": "Link to your GitHub profile (footer icon, next to Ghost's social accounts)"
+            },
+            "show_home_intro": {
+                "type": "boolean",
+                "default": true,
+                "group": "homepage",
+                "description": "Large intro sentence above the post list"
+            },
+            "home_intro_text": {
+                "type": "text",
+                "group": "homepage",
+                "description": "Default: site description",
+                "visibility": "show_home_intro:true"
+            },
+            "show_post_numbers": {
+                "type": "boolean",
+                "default": true,
+                "group": "homepage",
+                "description": "01, 02… numbering in the post list"
+            },
+            "show_author": {
+                "type": "boolean",
+                "default": true,
+                "group": "homepage"
+            },
+            "show_reading_time": {
+                "type": "boolean",
+                "default": true,
+                "group": "homepage"
+            },
+            "show_publish_date": {
+                "type": "boolean",
+                "default": false,
+                "group": "homepage"
+            },
+            "show_breadcrumb": {
+                "type": "boolean",
+                "default": true,
+                "group": "post",
+                "description": "Prompt-style breadcrumb at the top of posts"
+            },
+            "code_blocks_as_windows": {
+                "type": "boolean",
+                "default": true,
+                "group": "post",
+                "description": "Code blocks with a GNOME window headerbar"
+            },
+            "code_style": {
+                "type": "select",
+                "options": [
+                    "Yaru",
+                    "Ray.so"
+                ],
+                "default": "Yaru",
+                "group": "post",
+                "description": "Code colors inside the window: Ubuntu terminal or ray.so palette"
+            },
+            "syntax_highlighting": {
+                "type": "boolean",
+                "default": true,
+                "group": "post",
+                "description": "Syntax colors in code blocks"
+            },
+            "show_post_signup": {
+                "type": "boolean",
+                "default": true,
+                "group": "post",
+                "description": "Newsletter block at the end of posts"
+            },
+            "show_related_articles": {
+                "type": "boolean",
+                "default": true,
+                "group": "post"
+            }
+        }
+    }
+}

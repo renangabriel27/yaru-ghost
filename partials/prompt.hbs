@@ -1,0 +1,21 @@
+{{!--
+    Terminal prompt in the style of Ubuntu's bash: user@host:path$ command
+    Parameters: path (text after "~"), pathUrl (link for the path, optional), command,
+    search (true = instead of the command, a title search field with the blinking cursor),
+    filter (Content API filter for the search, e.g. "tag:rails")
+--}}
+<p class="gh-prompt">
+    {{#if @custom.terminal_prompt}}<span class="gh-prompt-user">{{@custom.terminal_prompt}}</span>:{{/if}}<a class="gh-prompt-path" href="{{@site.url}}">~</a>{{#if path}}<span class="gh-prompt-path">/</span>{{#if pathUrl}}<a class="gh-prompt-path" href="{{pathUrl}}">{{path}}</a>{{else}}<span class="gh-prompt-path">{{path}}</span>{{/if}}{{/if}}<span class="gh-prompt-sign">$</span>
+    {{#if search}}
+        {{#if @custom.prompt_search}}
+            <label class="gh-prompt-search" data-filter="{{filter}}" data-none="{{t "No posts found"}}" data-one="{{t "1 post found"}}" data-many="{{t "% posts found"}}" data-by="{{t "By {authors}" authors="%"}}"{{#if @custom.show_author}} data-show-author{{/if}}>
+                <span class="gh-prompt-query" aria-hidden="true"></span><span class="gh-cursor" aria-hidden="true"></span><span class="gh-prompt-hint" aria-hidden="true">{{t "type to search posts"}}</span>
+                <input class="gh-prompt-input" type="search" name="q" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-label="{{t "Search posts by title"}}">
+            </label>
+        {{else}}
+            {{#if command}}<span class="gh-prompt-cmd">{{command}}</span>{{/if}}
+        {{/if}}
+    {{else}}
+        {{#if command}}<span class="gh-prompt-cmd">{{command}}</span>{{/if}}
+    {{/if}}
+</p>

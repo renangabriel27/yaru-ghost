@@ -1,0 +1,17 @@
+{{!< default}}
+{{!-- Error page styled as a GNOME terminal window --}}
+
+<main class="gh-main gh-outer">
+    <section class="gh-error gh-inner">
+        <div class="gh-window">
+            <div class="gh-window-bar"><span>{{t "Terminal"}}</span></div>
+            <div class="gh-window-body">
+                {{> "prompt" command=(t "cd ./page")}}
+                <p class="gh-error-code">{{statusCode}}</p>
+                <p class="gh-error-message">bash: {{#match statusCode 404}}{{t "page not found"}}{{else}}{{message}}{{/match}}</p>
+                {{> "prompt"}}
+            </div>
+        </div>
+        <a class="gh-button" href="{{@site.url}}">{{t "Back to home"}}</a>
+    </section>
+</main>

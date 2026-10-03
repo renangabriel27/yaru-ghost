@@ -1,0 +1,19 @@
+<p>For years, a new Rails app meant PostgreSQL <em>and</em> Redis: one for data, the other for jobs, cache and Action Cable. Rails 8 ships with the <strong>Solid</strong> trio, which runs all three on top of the database you already have.</p>
+<table><thead><tr><th>Need</th><th>Before</th><th>Rails 8 default</th></tr></thead><tbody><tr><td>Background jobs</td><td>Sidekiq + Redis</td><td>Solid Queue</td></tr><tr><td>Cache</td><td>Redis / Memcached</td><td>Solid Cache</td></tr><tr><td>WebSockets</td><td>Redis pub/sub</td><td>Solid Cable</td></tr></tbody></table>
+<h2 id="solid-queue">Solid Queue</h2>
+<p>Jobs are rows in a table, picked up with <code>FOR UPDATE SKIP LOCKED</code>. Recurring jobs live in a YAML file, no extra scheduler needed:</p>
+<pre><code class="language-yaml"># config/recurring.yml
+production:
+  clear_abandoned_carts:
+    class: ClearAbandonedCartsJob
+    schedule: every day at 3am
+  sync_exchange_rates:
+    command: &quot;ExchangeRate.sync!&quot;
+    schedule: every hour</code></pre>
+<h2 id="solid-cache">Solid Cache</h2>
+<p>The cache lives on disk instead of RAM. Disk is cheap, so you can keep a much bigger cache for much longer.</p>
+<pre><code class="language-ruby"># config/environments/production.rb
+config.cache_store = :solid_cache_store</code></pre>
+<h2 id="when-redis">When you still want Redis</h2>
+<ul><li>Very high job throughput, where the extra database load matters.</li><li>Features that rely on Redis data structures: rate limiting with sorted sets, leaderboards.</li><li>An existing Sidekiq setup that works. There's no prize for migrating.</li></ul>
+<div class="kg-card kg-callout-card kg-callout-card-accent"><div class="kg-callout-emoji">🧰</div><div class="kg-callout-text">One less service means one less thing to provision, monitor and upgrade. For most apps, that's the real win.</div></div>
